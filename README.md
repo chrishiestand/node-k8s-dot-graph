@@ -20,11 +20,6 @@ async function main() {
 
 ```
 
-## Example Output
-
-This is an example of a small 2-node, 3-pod cluster. These get much larger.
-![Example output](https://github.com/chrishiestand/node-k8s-dot-graph/raw/master/test/screenshot.png)
-
 ## Options
 
 `makeDotGraph()` accepts the following dot format options with defaults shown:
@@ -41,8 +36,44 @@ kdg.makeDotGraph({
   ranksep      : '2.0 equally',
   internetShape: 'star',
 })
-
 ```
+
+## Example Output
+
+This is an example of a small 2-node, 3-pod cluster. These get much larger.
+
+```dot
+digraph {
+sep=6.2;
+ranksep="2.0 equally";
+splines="ortho";
+"svcs:app1" [label="service: app1"][shape=diamond];
+"svcs:auth" [label="service: auth"][shape=diamond];
+"svcs:redis-master" [label="service: redis-master"][shape=diamond];
+"pods:app1-3746604072-3jfn8" [label="app1-3746604072-3jfn8"][shape=oval];
+"pods:auth-1124301931-8h7fp" [label="auth-1124301931-8h7fp"][shape=oval];
+"pods:redis-master-853269215-glqjs" [label="redis-master-853269215-glqjs"][shape=oval];
+"ings:svc" [label="ingress: svc"][shape=invtriangle];
+"internet" [label="internet"][shape=star];subgraph "cluster-gke-testcluster-pool-3-0aa49f08-p92k" { label="node: gke-testcluster-pool-3-0aa49f08-p92k";
+"pods:auth-1124301931-8h7fp";
+"pods:redis-master-853269215-glqjs";
+}
+
+subgraph "cluster-gke-testcluster-pool-3-cc049887-zsmc" { label="node: gke-testcluster-pool-3-cc049887-zsmc";
+"pods:app1-3746604072-3jfn8";
+}
+"internet" -> "ings:svc";
+"internet" -> "svcs:app1";
+"ings:svc" -> "svcs:auth";
+"svcs:app1" -> "pods:app1-3746604072-3jfn8";
+"svcs:auth" -> "pods:auth-1124301931-8h7fp";
+"svcs:redis-master" -> "pods:redis-master-853269215-glqjs";
+}
+```
+
+### Example Visualized
+![Example output](https://github.com/chrishiestand/node-k8s-dot-graph/raw/master/test/screenshot.png)
+
 ## Contributions
 
 Issues/PRs are welcome.
