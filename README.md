@@ -19,3 +19,25 @@ async function main() {
 }
 
 ```
+
+## Options
+
+`makeDotGraph()` accepts the following dot format options with defaults shown:
+
+```javascript
+
+kdg.makeDotGraph({
+  nodeList,
+  serviceList,
+  podList,
+  ingressList,
+  splines      : 'ortho',
+  sep          : '6.2',
+  ranksep      : '2.0 equally',
+  internetShape: 'star',
+})
+
+```
+## Contributions
+
+Issues/PRs are welcome.
