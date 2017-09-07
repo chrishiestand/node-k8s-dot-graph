@@ -1,0 +1,33 @@
+{
+  "name": "k8s-dot-graph",
+  "version": "0.0.1",
+  "description": "library to convert kubernetes descriptions to a dot (grpahviz) graph",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/ava -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrishiestand/node-k8s-dot-graph.git"
+  },
+  "keywords": [
+    "kubernetes",
+    "k8s",
+    "graphviz",
+    "dot",
+    "network",
+    "graph"
+  ],
+  "author": "Chris Hiestand <chrishiestand@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrishiestand/node-k8s-dot-graph/issues"
+  },
+  "homepage": "https://github.com/chrishiestand/node-k8s-dot-graph#readme",
+  "dependencies": {
+    "ramda": "^0.24.1"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0"
+  }
+}

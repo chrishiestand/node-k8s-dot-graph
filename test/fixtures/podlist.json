@@ -1,0 +1,588 @@
+{
+  "kind": "PodList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/default/pods",
+    "resourceVersion": "43289915"
+  },
+  "items": [{
+    "metadata": {
+      "name": "app1-3746604072-3jfn8",
+      "generateName": "app1-3746604072-",
+      "namespace": "default",
+      "selfLink": "/api/v1/namespaces/default/pods/app1-3746604072-3jfn8",
+      "uid": "620cef96-8e73-11e7-acd2-42010a800056",
+      "resourceVersion": "42535297",
+      "creationTimestamp": "2017-08-31T17:39:47Z",
+      "labels": {
+        "name": "app1",
+        "pod-template-hash": "3746604072",
+        "version": "1"
+      },
+      "annotations": {
+        "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicaSet\",\"namespace\":\"default\",\"name\":\"app1-3746604072\",\"uid\":\"620a9f27-8e73-11e7-acd2-42010a800056\",\"apiVersion\":\"extensions\",\"resourceVersion\":\"42535254\"}}\n",
+        "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container app1"
+      },
+      "ownerReferences": [{
+        "apiVersion": "extensions/v1beta1",
+        "kind": "ReplicaSet",
+        "name": "app1-3746604072",
+        "uid": "620a9f27-8e73-11e7-acd2-42010a800056",
+        "controller": true,
+        "blockOwnerDeletion": true
+      }]
+    },
+    "spec": {
+      "volumes": [{
+        "name": "secret-env",
+        "secret": {
+          "secretName": "env-app1",
+          "defaultMode": 420
+        }
+      }, {
+        "name": "default-token-31qef",
+        "secret": {
+          "secretName": "default-token-31qef",
+          "defaultMode": 420
+        }
+      }],
+      "containers": [{
+        "name": "app1",
+        "image": "gcr.io/testproject/app1:2017_08_31_10_38_32",
+        "ports": [{
+          "name": "app1",
+          "containerPort": 1080,
+          "protocol": "TCP"
+        }, {
+          "name": "app1-s",
+          "containerPort": 1443,
+          "protocol": "TCP"
+        }],
+        "resources": {
+          "requests": {
+            "cpu": "100m"
+          }
+        },
+        "volumeMounts": [{
+          "name": "secret-env",
+          "readOnly": true,
+          "mountPath": "/opt/app1/env"
+        },{
+          "name": "default-token-31qef",
+          "readOnly": true,
+          "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+        }],
+        "livenessProbe": {
+          "httpGet": {
+            "path": "/login/",
+            "port": 1443,
+            "scheme": "HTTPS"
+          },
+          "initialDelaySeconds": 15,
+          "timeoutSeconds": 3,
+          "periodSeconds": 10,
+          "successThreshold": 1,
+          "failureThreshold": 3
+        },
+        "readinessProbe": {
+          "httpGet": {
+            "path": "/login/",
+            "port": 1443,
+            "scheme": "HTTPS"
+          },
+          "initialDelaySeconds": 3,
+          "timeoutSeconds": 1,
+          "periodSeconds": 10,
+          "successThreshold": 1,
+          "failureThreshold": 3
+        },
+        "lifecycle": {
+          "preStop": {
+            "exec": {
+              "command": ["/usr/sbin/nginx", "-s", "quit"]
+            }
+          }
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "imagePullPolicy": "IfNotPresent"
+      }, {
+        "name": "sysctl-buddy",
+        "image": "alpine",
+        "command": ["/bin/sh"],
+        "args": ["-c", "sysctl -w net.core.somaxconn=8192 && sleep 9999999d"],
+        "resources": {
+          "requests": {
+            "cpu": "1m",
+            "memory": "1Mi"
+          }
+        },
+        "volumeMounts": [{
+          "name": "default-token-31qef",
+          "readOnly": true,
+          "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+        }],
+        "lifecycle": {
+          "preStop": {
+            "exec": {
+              "command": ["/usr/bin/killall", "sleep"]
+            }
+          }
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "imagePullPolicy": "Always",
+        "securityContext": {
+          "privileged": true
+        }
+      }],
+      "restartPolicy": "Always",
+      "terminationGracePeriodSeconds": 30,
+      "dnsPolicy": "ClusterFirst",
+      "serviceAccountName": "default",
+      "serviceAccount": "default",
+      "nodeName": "gke-testcluster-pool-3-cc049887-zsmc",
+      "securityContext": {},
+      "schedulerName": "default-scheduler",
+      "tolerations": [{
+        "key": "node.alpha.kubernetes.io/notReady",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 300
+      }, {
+        "key": "node.alpha.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 300
+      }]
+    },
+    "status": {
+      "phase": "Running",
+      "conditions": [{
+        "type": "Initialized",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2017-08-31T17:39:47Z"
+      }, {
+        "type": "Ready",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2017-08-31T17:40:07Z"
+      }, {
+        "type": "PodScheduled",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2017-08-31T17:39:47Z"
+      }],
+      "hostIP": "10.128.0.6",
+      "podIP": "10.4.4.57",
+      "startTime": "2017-08-31T17:39:47Z",
+      "containerStatuses": [{
+        "name": "app1",
+        "state": {
+          "running": {
+            "startedAt": "2017-08-31T17:39:57Z"
+          }
+        },
+        "lastState": {},
+        "ready": true,
+        "restartCount": 0,
+        "image": "gcr.io/testproject/app1:2017_08_31_10_38_32",
+        "imageID": "docker://sha256:571e181e83011e0ea18c9faabe4dd78f728bcd3570234cf40e990a78bb405dd4",
+        "containerID": "docker://04c67e89798a9e241c662aeb3ff73372e60edef58286483eb2e0ac3a4c3d2173"
+      }, {
+        "name": "sysctl-buddy",
+        "state": {
+          "running": {
+            "startedAt": "2017-08-31T17:39:57Z"
+          }
+        },
+        "lastState": {},
+        "ready": true,
+        "restartCount": 0,
+        "image": "alpine:latest",
+        "imageID": "docker://sha256:7328f6f8b41890597575cbaadc884e7386ae0acc53b747401ebce5cf0d624560",
+        "containerID": "docker://f757cbf74ac2ed0ae1a5c474ca9a4903b2bbb4d50095355da2ddc18cf3c8606a"
+      }],
+      "qosClass": "Burstable"
+    }
+  }, {
+    "metadata": {
+      "name": "auth-1124301931-8h7fp",
+      "generateName": "auth-1124301931-",
+      "namespace": "default",
+      "selfLink": "/api/v1/namespaces/default/pods/auth-1124301931-8h7fp",
+      "uid": "5a74e220-6f7f-11e7-acd2-42010a800056",
+      "resourceVersion": "37140661",
+      "creationTimestamp": "2017-07-23T08:17:22Z",
+      "labels": {
+        "app": "auth",
+        "consumed": "internal-external",
+        "name": "auth",
+        "pod-template-hash": "1124301931"
+      },
+      "annotations": {
+        "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicaSet\",\"namespace\":\"default\",\"name\":\"auth-1124301931\",\"uid\":\"2396b810-6695-11e7-9a50-42010a800056\",\"apiVersion\":\"extensions\",\"resourceVersion\":\"35581135\"}}\n"
+      },
+      "ownerReferences": [{
+        "apiVersion": "extensions/v1beta1",
+        "kind": "ReplicaSet",
+        "name": "auth-1124301931",
+        "uid": "2396b810-6695-11e7-9a50-42010a800056",
+        "controller": true,
+        "blockOwnerDeletion": true
+      }]
+    },
+    "spec": {
+      "volumes": [{
+        "name": "secret-env",
+        "secret": {
+          "secretName": "env-auth",
+          "defaultMode": 420
+        }
+      }, {
+        "name": "secret-tls",
+        "secret": {
+          "secretName": "tls-auth",
+          "defaultMode": 420
+        }
+      }, {
+        "name": "default-token-31qef",
+        "secret": {
+          "secretName": "default-token-31qef",
+          "defaultMode": 420
+        }
+      }],
+      "containers": [{
+        "name": "auth",
+        "image": "gcr.io/testproject/auth:2017_07_11_16_57_28",
+        "ports": [{
+          "name": "http",
+          "containerPort": 80,
+          "protocol": "TCP"
+        }, {
+          "name": "https",
+          "containerPort": 443,
+          "protocol": "TCP"
+        }],
+        "env": [{
+          "name": "dotenv_path",
+          "value": "/opt/auth/env/.env"
+        }],
+        "resources": {
+          "limits": {
+            "cpu": "200m",
+            "memory": "1000Mi"
+          },
+          "requests": {
+            "cpu": "25m",
+            "memory": "100Mi"
+          }
+        },
+        "volumeMounts": [{
+          "name": "secret-env",
+          "readOnly": true,
+          "mountPath": "/opt/auth/env"
+        }, {
+          "name": "default-token-31qef",
+          "readOnly": true,
+          "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+        }],
+        "livenessProbe": {
+          "httpGet": {
+            "path": "/",
+            "port": 443,
+            "scheme": "HTTPS"
+          },
+          "initialDelaySeconds": 5,
+          "timeoutSeconds": 2,
+          "periodSeconds": 10,
+          "successThreshold": 1,
+          "failureThreshold": 3
+        },
+        "readinessProbe": {
+          "httpGet": {
+            "path": "/",
+            "port": 443,
+            "scheme": "HTTPS"
+          },
+          "initialDelaySeconds": 2,
+          "timeoutSeconds": 1,
+          "periodSeconds": 10,
+          "successThreshold": 1,
+          "failureThreshold": 3
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "imagePullPolicy": "IfNotPresent"
+      }],
+      "restartPolicy": "Always",
+      "terminationGracePeriodSeconds": 30,
+      "dnsPolicy": "ClusterFirst",
+      "serviceAccountName": "default",
+      "serviceAccount": "default",
+      "nodeName": "gke-testcluster-pool-3-0aa49f08-p92k",
+      "securityContext": {},
+      "schedulerName": "default-scheduler",
+      "tolerations": [{
+        "key": "node.alpha.kubernetes.io/notReady",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 300
+      }, {
+        "key": "node.alpha.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 300
+      }]
+    },
+    "status": {
+      "phase": "Running",
+      "conditions": [{
+        "type": "Initialized",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2017-07-23T08:17:22Z"
+      }, {
+        "type": "Ready",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2017-07-23T08:18:02Z"
+      }, {
+        "type": "PodScheduled",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2017-07-23T08:17:22Z"
+      }],
+      "hostIP": "10.128.0.5",
+      "podIP": "10.4.3.4",
+      "startTime": "2017-07-23T08:17:22Z",
+      "containerStatuses": [{
+        "name": "auth",
+        "state": {
+          "running": {
+            "startedAt": "2017-07-23T08:17:37Z"
+          }
+        },
+        "lastState": {},
+        "ready": true,
+        "restartCount": 0,
+        "image": "gcr.io/testproject/auth:2017_07_11_16_57_28",
+        "imageID": "docker://sha256:269878b3beff354435df570a0abeacfae2ecfe21d32384474a242bd4426e3d2f",
+        "containerID": "docker://3ed14312a92ab9222b94efe1cf384b3cb5047c502d17667656c55ce2ac0ade1f"
+      }],
+      "qosClass": "Burstable"
+    }
+  }, {
+    "metadata": {
+      "name": "redis-master-853269215-glqjs",
+      "generateName": "redis-master-853269215-",
+      "namespace": "default",
+      "selfLink": "/api/v1/namespaces/default/pods/redis-master-853269215-glqjs",
+      "uid": "d6ed7472-6f7e-11e7-acd2-42010a800056",
+      "resourceVersion": "37140304",
+      "creationTimestamp": "2017-07-23T08:13:42Z",
+      "labels": {
+        "app": "redis",
+        "pod-template-hash": "853269205",
+        "purpose": "keyvalue",
+        "role": "master",
+        "tier": "backend"
+      },
+      "annotations": {
+        "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicaSet\",\"namespace\":\"default\",\"name\":\"redis-master-853269215\",\"uid\":\"694c94ad-5326-11e7-a5bb-42010a800056\",\"apiVersion\":\"extensions\",\"resourceVersion\":\"37139160\"}}\n"
+      },
+      "ownerReferences": [{
+        "apiVersion": "extensions/v1beta1",
+        "kind": "ReplicaSet",
+        "name": "redis-master-853269215",
+        "uid": "694c94ad-5326-11e7-a5bb-42010a800056",
+        "controller": true,
+        "blockOwnerDeletion": true
+      }]
+    },
+    "spec": {
+      "volumes": [{
+        "name": "secret-env",
+        "secret": {
+          "secretName": "env-redis-master",
+          "defaultMode": 420
+        }
+      }, {
+        "name": "data",
+        "gcePersistentDisk": {
+          "pdName": "blah-0",
+          "fsType": "ext4"
+        }
+      }, {
+        "name": "sys",
+        "hostPath": {
+          "path": "/sys"
+        }
+      }, {
+        "name": "default-token-31qef",
+        "secret": {
+          "secretName": "default-token-31qef",
+          "defaultMode": 420
+        }
+      }],
+      "containers": [{
+        "name": "sysctl-buddy",
+        "image": "alpine",
+        "command": ["/bin/sh"],
+        "args": ["-c", "echo never > /sys/kernel/mm/transparent_hugepage/enabled && sysctl -w net.core.somaxconn=8192 vm.overcommit_memory=1 && sleep 9999999d"],
+        "resources": {
+          "requests": {
+            "cpu": "1m",
+            "memory": "1Mi"
+          }
+        },
+        "volumeMounts": [{
+          "name": "sys",
+          "mountPath": "/sys"
+        }, {
+          "name": "default-token-31qef",
+          "readOnly": true,
+          "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+        }],
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "imagePullPolicy": "Always",
+        "securityContext": {
+          "privileged": true
+        }
+      }, {
+        "name": "redis",
+        "image": "redis:3.2",
+        "command": ["redis-server", "/opt/redis/.env", "--maxmemory", "1gb", "--maxmemory-policy", "volatile-ttl", "--tcp-keepalive", "60", "--tcp-backlog", "1024", "--appendonly", "yes", "--appendfsync", "everysec"],
+        "ports": [{
+          "containerPort": 6379,
+          "protocol": "TCP"
+        }],
+        "resources": {
+          "requests": {
+            "cpu": "100m",
+            "memory": "100Mi"
+          }
+        },
+        "volumeMounts": [{
+          "name": "secret-env",
+          "readOnly": true,
+          "mountPath": "/opt/redis/"
+        }, {
+          "name": "data",
+          "mountPath": "/data"
+        }, {
+          "name": "default-token-31qef",
+          "readOnly": true,
+          "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+        }],
+        "livenessProbe": {
+          "tcpSocket": {
+            "port": 6379
+          },
+          "initialDelaySeconds": 3,
+          "timeoutSeconds": 1,
+          "periodSeconds": 10,
+          "successThreshold": 1,
+          "failureThreshold": 3
+        },
+        "readinessProbe": {
+          "tcpSocket": {
+            "port": 6379
+          },
+          "initialDelaySeconds": 10,
+          "timeoutSeconds": 1,
+          "periodSeconds": 10,
+          "successThreshold": 1,
+          "failureThreshold": 3
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "imagePullPolicy": "IfNotPresent"
+      }],
+      "restartPolicy": "Always",
+      "terminationGracePeriodSeconds": 30,
+      "dnsPolicy": "ClusterFirst",
+      "serviceAccountName": "default",
+      "serviceAccount": "default",
+      "nodeName": "gke-testcluster-pool-3-0aa49f08-p92k",
+      "securityContext": {},
+      "affinity": {
+        "nodeAffinity": {
+          "requiredDuringSchedulingIgnoredDuringExecution": {
+            "nodeSelectorTerms": [{
+              "matchExpressions": [{
+                "key": "failure-domain.beta.kubernetes.io/zone",
+                "operator": "In",
+                "values": ["us-central1-b"]
+              }]
+            }]
+          }
+        }
+      },
+      "schedulerName": "default-scheduler",
+      "tolerations": [{
+        "key": "node.alpha.kubernetes.io/notReady",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 300
+      }, {
+        "key": "node.alpha.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 300
+      }]
+    },
+    "status": {
+      "phase": "Running",
+      "conditions": [{
+        "type": "Initialized",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2017-07-23T08:13:42Z"
+      }, {
+        "type": "Ready",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2017-07-23T08:16:52Z"
+      }, {
+        "type": "PodScheduled",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2017-07-23T08:13:42Z"
+      }],
+      "hostIP": "10.128.0.3",
+      "podIP": "10.4.2.18",
+      "startTime": "2017-07-23T08:13:42Z",
+      "containerStatuses": [{
+        "name": "redis",
+        "state": {
+          "running": {
+            "startedAt": "2017-07-23T08:16:40Z"
+          }
+        },
+        "lastState": {},
+        "ready": true,
+        "restartCount": 0,
+        "image": "redis:3.2",
+        "imageID": "docker://sha256:4e482b286430fc5abed4cd26965ef200c59b727739919489d9ba42d5c361576c",
+        "containerID": "docker://9f5c0a37ac032b7845755b9a63bced43c065ba597b15cc7f9420e6aa4b13327b"
+      }, {
+        "name": "sysctl-buddy",
+        "state": {
+          "running": {
+            "startedAt": "2017-07-23T08:15:22Z"
+          }
+        },
+        "lastState": {},
+        "ready": true,
+        "restartCount": 0,
+        "image": "alpine:latest",
+        "imageID": "docker://sha256:7328f6f8b41890597575cbaadc884e7386ae0acc53b747401ebce5cf0d624560",
+        "containerID": "docker://3c8befda0256c64494f0605541b64513d3ed4e5ccfc15772896c6b88e35fe074"
+      }],
+      "qosClass": "Burstable"
+    }
+  }]
+}

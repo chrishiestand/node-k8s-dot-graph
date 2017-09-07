@@ -1,0 +1,51 @@
+{
+  "kind": "IngressList",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "selfLink": "/apis/extensions/v1beta1/namespaces/default/ingresses",
+    "resourceVersion": "43289915"
+  },
+  "items": [{
+    "metadata": {
+      "name": "svc",
+      "namespace": "default",
+      "selfLink": "/apis/extensions/v1beta1/namespaces/default/ingresses/svc",
+      "uid": "3157b064-7ae0-11e6-9fee-42710a800057",
+      "resourceVersion": "42812513",
+      "generation": 10,
+      "creationTimestamp": "2016-09-15T01:03:20Z",
+      "annotations": {
+        "ingress.kubernetes.io/backends": "{\"k8s-be-30524--13bdae392d1c11d2\":\"HEALTHY\",\"k8s-be-31453--13bdae392d1c11d2\":\"HEALTHY\",\"k8s-be-31509--13bdae392d1c11d2\":\"HEALTHY\",\"k8s-be-31817--13bdae392d1c11d2\":\"HEALTHY\",\"k8s-be-32008--13bdae392d1c11d2\":\"HEALTHY\",\"k8s-be-32146--13bdae392d1c11d2\":\"HEALTHY\",\"k8s-be-32452--13bdae392d1c11d2\":\"HEALTHY\"}",
+        "ingress.kubernetes.io/https-forwarding-rule": "k8s-fws-default-svc--13bdae392d1c11d2",
+        "ingress.kubernetes.io/https-target-proxy": "k8s-tps-default-svc--13bdae392d1c11d2",
+        "ingress.kubernetes.io/ssl-cert": "k8s-ssl-default-svc--13bdae392d1c11d2",
+        "ingress.kubernetes.io/url-map": "k8s-um-default-svc--13bdae392d1c11d2",
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"kind\":\"Ingress\",\"apiVersion\":\"extensions/v1beta1\",\"metadata\":{\"name\":\"svc\",\"creationTimestamp\":null,\"annotations\":{\"kubernetes.io/ingress.allow-http\":\"false\"}},\"spec\":{\"tls\":[{\"secretName\":\"tls-secret\"}],\"rules\":[{\"http\":{\"paths\":[{\"path\":\"/auth/*\",\"backend\":{\"serviceName\":\"auth\",\"servicePort\":80}}]}}]},\"status\":{\"loadBalancer\":{}}}",
+        "kubernetes.io/ingress.allow-http": "false"
+      }
+    },
+    "spec": {
+      "tls": [{
+        "secretName": "tls-secret"
+      }],
+      "rules": [{
+        "http": {
+          "paths": [{
+            "path": "/auth/*",
+            "backend": {
+              "serviceName": "auth",
+              "servicePort": 80
+            }
+          }]
+        }
+      }]
+    },
+    "status": {
+      "loadBalancer": {
+        "ingress": [{
+          "ip": "17.18.19.20"
+        }]
+      }
+    }
+  }]
+}

@@ -1,0 +1,127 @@
+{
+  "kind": "ServiceList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/default/services",
+    "resourceVersion": "43289915"
+  },
+  "items": [{
+    "metadata": {
+      "name": "app1",
+      "namespace": "default",
+      "selfLink": "/api/v1/namespaces/default/services/app1",
+      "uid": "05ba141f-6b13-11e6-a017-42010a800058",
+      "resourceVersion": "9822108",
+      "creationTimestamp": "2016-08-25T22:26:52Z",
+      "labels": {
+        "name": "app1"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"kind\":\"Service\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"app1\",\"namespace\":\"default\",\"selfLink\":\"/api/v1/namespaces/default/services/app1\",\"uid\":\"05ba141f-6b13-11e6-a017-42010a800058\",\"resourceVersion\":\"7635984\",\"creationTimestamp\":\"2016-08-25T22:26:52Z\",\"labels\":{\"name\":\"app1\"}},\"spec\":{\"ports\":[{\"name\":\"app1\",\"protocol\":\"TCP\",\"port\":80,\"targetPort\":1080,\"nodePort\":31005},{\"name\":\"app1-s\",\"protocol\":\"TCP\",\"port\":443,\"targetPort\":1443,\"nodePort\":32287}],\"selector\":{\"name\":\"app1\"},\"clusterIP\":\"10.7.252.91\",\"type\":\"LoadBalancer\",\"sessionAffinity\":\"None\",\"loadBalancerIP\":\"9.8.7.6\"},\"status\":{\"loadBalancer\":{\"ingress\":[{\"ip\":\"9.8.7.6\"}]}}}"
+      }
+    },
+    "spec": {
+      "ports": [{
+        "name": "app1",
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": 1080,
+        "nodePort": 31005
+      }, {
+        "name": "app1-s",
+        "protocol": "TCP",
+        "port": 443,
+        "targetPort": 1443,
+        "nodePort": 32287
+      }],
+      "selector": {
+        "name": "app1"
+      },
+      "clusterIP": "10.7.252.91",
+      "type": "LoadBalancer",
+      "sessionAffinity": "None",
+      "loadBalancerIP": "9.8.7.6"
+    },
+    "status": {
+      "loadBalancer": {
+        "ingress": [{
+          "ip": "9.8.7.6"
+        }]
+      }
+    }
+  }, {
+    "metadata": {
+      "name": "auth",
+      "namespace": "default",
+      "selfLink": "/api/v1/namespaces/default/services/auth",
+      "uid": "06f7298c-7952-11e6-9fee-42010a800058",
+      "resourceVersion": "700389",
+      "creationTimestamp": "2016-09-13T01:33:09Z",
+      "labels": {
+        "app": "auth",
+        "name": "auth"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"kind\":\"Service\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"auth\",\"creationTimestamp\":null,\"labels\":{\"app\":\"auth\",\"name\":\"auth\"}},\"spec\":{\"ports\":[{\"name\":\"http\",\"protocol\":\"TCP\",\"port\":80,\"targetPort\":80},{\"name\":\"https\",\"protocol\":\"TCP\",\"port\":443,\"targetPort\":443}],\"selector\":{\"name\":\"auth\"},\"type\":\"NodePort\"},\"status\":{\"loadBalancer\":{}}}"
+      }
+    },
+    "spec": {
+      "ports": [{
+        "name": "http",
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": 80,
+        "nodePort": 31509
+      }, {
+        "name": "https",
+        "protocol": "TCP",
+        "port": 443,
+        "targetPort": 443,
+        "nodePort": 31949
+      }],
+      "selector": {
+        "name": "auth"
+      },
+      "clusterIP": "10.7.245.207",
+      "type": "NodePort",
+      "sessionAffinity": "None"
+    },
+    "status": {
+      "loadBalancer": {}
+    }
+  }, {
+    "metadata": {
+      "name": "redis-master",
+      "namespace": "default",
+      "selfLink": "/api/v1/namespaces/default/services/redis-master",
+      "uid": "08987898-7951-11e6-9fee-42010a800058",
+      "resourceVersion": "388010",
+      "creationTimestamp": "2016-10-13T01:26:02Z",
+      "labels": {
+        "name": "redis-master",
+        "role": "master",
+        "storage": "redis",
+        "tier": "backend"
+      }
+    },
+    "spec": {
+      "ports": [{
+        "name": "redis-master",
+        "protocol": "TCP",
+        "port": 6379,
+        "targetPort": 6379
+      }],
+      "selector": {
+        "app": "redis",
+        "purpose": "keyvalue",
+        "role": "master"
+      },
+      "clusterIP": "10.7.248.224",
+      "type": "ClusterIP",
+      "sessionAffinity": "None"
+    },
+    "status": {
+      "loadBalancer": {}
+    }
+  }]
+}
