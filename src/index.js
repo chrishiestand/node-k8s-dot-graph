@@ -2,7 +2,7 @@ const ramda=require('ramda')
 
 const kdg = {}
 
-kdg.makeDotGraph = function makeDotGraph({nodeList = [], serviceList = [], podList = [], ingressList = [], splines='ortho', sep='6.2', ranksep='2.0 equally', internetShape = 'star'}) {
+kdg.makeDotGraph = function makeDotGraph({nodeList = [], serviceList = [], podList = [], ingressList = [], splines='ortho', sep='6.2', ranksep='2.0 equally', internetShape = 'circle'}) {
 
   const minionObjs = kdg.makeObjsDotStandard(nodeList, 'nodes')
   const svcObjs = kdg.makeObjsDotStandard(serviceList, 'svcs')

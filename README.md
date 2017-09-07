@@ -35,9 +35,12 @@ kdg.makeDotGraph({
   splines      : 'ortho',
   sep          : '6.2',
   ranksep      : '2.0 equally',
-  internetShape: 'star',
+  internetShape: 'circle',
 })
 ```
+
+## Installation
+`npm install k8s-dot-graph`
 
 ## Example Output
 
@@ -55,7 +58,7 @@ splines="ortho";
 "pods:auth-1124301931-8h7fp" [label="auth-1124301931-8h7fp"][shape=oval];
 "pods:redis-master-853269215-glqjs" [label="redis-master-853269215-glqjs"][shape=oval];
 "ings:svc" [label="ingress: svc"][shape=invtriangle];
-"internet" [label="internet"][shape=star];subgraph "cluster-gke-testcluster-pool-3-0aa49f08-p92k" { label="node: gke-testcluster-pool-3-0aa49f08-p92k";
+"internet" [label="internet"][shape=circle];subgraph "cluster-gke-testcluster-pool-3-0aa49f08-p92k" { label="node: gke-testcluster-pool-3-0aa49f08-p92k";
 "pods:auth-1124301931-8h7fp";
 "pods:redis-master-853269215-glqjs";
 }
