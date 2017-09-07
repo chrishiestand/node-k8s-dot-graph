@@ -81,3 +81,9 @@ subgraph "cluster-gke-testcluster-pool-3-cc049887-zsmc" { label="node: gke-testc
 ## Contributions
 
 Issues/PRs are welcome.
+
+### Possible TODO Items
+
+* Simplify/expand dot file options
+* Add version support for kubernetes API (currently tested against 1.6)
+* Add support for additional kubernetes objects?
