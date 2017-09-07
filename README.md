@@ -1,4 +1,5 @@
 # node-k8s-dot-graph
+[![NPM](https://nodei.co/npm/k8s-dot-graph.png)](https://nodei.co/npm/k8s-dot-graph/)
 
 node.js library to create a dot graph (e.g. graphviz) from kubernetes objects. This lets you create a graph visualization of your kubernetes cluster.
 
