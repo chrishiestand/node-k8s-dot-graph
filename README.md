@@ -22,6 +22,7 @@ async function main() {
 
 ## Example Output
 
+This is an example of a small 2-node, 3-pod cluster. These get much larger.
 ![Example output](https://github.com/chrishiestand/node-k8s-dot-graph/raw/master/test/screenshot.png)
 
 ## Options
