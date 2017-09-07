@@ -1,6 +1,6 @@
 {
   "name": "k8s-dot-graph",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "library to convert kubernetes descriptions to a dot (grpahviz) graph",
   "main": "src/index.js",
   "scripts": {
