@@ -4,7 +4,7 @@ node.js library to create a dot graph (e.g. graphviz) from kubernetes objects. T
 
 Inputs are the kubernetes object lists from the k8s api endpoints for NodeList, PodList, ServiceList, and IngressList and output is a string in dot format representing the kubernetes cluster.
 
-## Example
+## Example Code
 
 ```javascript
 import kdg from 'k8s-dot-graph'
@@ -19,6 +19,10 @@ async function main() {
 }
 
 ```
+
+## Example Output
+
+![Example output](https://github.com/chrishiestand/node-k8s-dot-graph/raw/master/test/screenshot.png)
 
 ## Options
 
