@@ -2,12 +2,12 @@ const ramda=require('ramda')
 
 const kdg = {}
 
-kdg.makeDotGraph = function makeDotGraph({nodes = [], svcs = [], pods = [], ings = [], splines='ortho', sep='6.2', ranksep='2.0 equally', internetShape = 'star'}) {
+kdg.makeDotGraph = function makeDotGraph({nodeList = [], serviceList = [], podList = [], ingressList = [], splines='ortho', sep='6.2', ranksep='2.0 equally', internetShape = 'star'}) {
 
-  const minionObjs = kdg.makeObjsDotStandard(nodes, 'nodes')
-  const svcObjs = kdg.makeObjsDotStandard(svcs, 'svcs')
-  const podObjs = kdg.makeObjsDotStandard(pods, 'pods')
-  const ingObjs = kdg.makeObjsDotStandard(ings, 'ings')
+  const minionObjs = kdg.makeObjsDotStandard(nodeList, 'nodes')
+  const svcObjs = kdg.makeObjsDotStandard(serviceList, 'svcs')
+  const podObjs = kdg.makeObjsDotStandard(podList, 'pods')
+  const ingObjs = kdg.makeObjsDotStandard(ingressList, 'ings')
 
   let dotGraphString = 'digraph {\n'
   dotGraphString += `sep=${sep};\n`

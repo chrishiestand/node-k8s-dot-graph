@@ -13,20 +13,20 @@ test('makeDotGraph empty', t => {
 
 test('makeDotGraph test', t => {
 
-  const nodes = getKubeItems('fixtures/nodelist.json')
-  const ings  = getKubeItems('fixtures/ingresslist.json')
-  const svcs  = getKubeItems('fixtures/servicelist.json')
-  const pods  = getKubeItems('fixtures/podlist.json')
+  const nodeList    = getKubeItems('fixtures/nodelist.json')
+  const ingressList = getKubeItems('fixtures/ingresslist.json')
+  const serviceList = getKubeItems('fixtures/servicelist.json')
+  const podList     = getKubeItems('fixtures/podlist.json')
 
-  const dotGraph = kdg.makeDotGraph({nodes, svcs, pods, ings})
+  const dotGraph = kdg.makeDotGraph({nodeList, serviceList, podList, ingressList})
 
   t.is(dotGraph, testDotGraph)
 });
 
 function getKubeItems(relPath) {
-  const listPath = path.join(__dirname, relPath)
+  const listPath   = path.join(__dirname, relPath)
   const listString = fs.readFileSync(listPath, {encoding: 'utf8'})
-  const listObj = JSON.parse(listString)
+  const listObj    = JSON.parse(listString)
   return listObj.items
 }
 
