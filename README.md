@@ -78,7 +78,7 @@ subgraph "cluster-gke-testcluster-pool-3-cc049887-zsmc" { label="node: gke-testc
 ```
 
 ### Example Visualized
-![Example output](https://github.com/chrishiestand/node-k8s-dot-graph/raw/master/test/screenshot.png)
+![Example output](https://pointillism.io/trevorgrayson/node-k8s-dot-graph/blob/master/example.dot)
 
 ## Contributions
 
